@@ -1,15 +1,15 @@
 import React from 'react'
 
 import AddUser from './AddUser'
-import Search  from './Search.jsx'
+import Search  from './Search'
 
-// makeStyles?
-
-export default function Controls(props) {
-  return (
-    <div id='controls'>
-      <AddUser/>
-      <Search/>
-    </div>
-  )
+export default class Controls extends React.Component {
+  render() {
+    return (
+      <div id='Controls'>
+        <AddUser addUser={this.props.addUser} />
+        <Search findUser={this.props.findUser} />
+      </div>
+    )
+  }
 }

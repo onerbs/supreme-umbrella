@@ -1,20 +1,15 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-import Card from './Card'
+import User from './User'
 
-export default function Deck(props) {
-  return (
-    <div id='deck'>
-      <Card value='A'/>
-      <Card value='B'/>
-      <Card value='C'/>
-      <Card value='D'/>
-      <Card value='E'/>
-      <Card value='F'/>
-      <Card value='G'/>
-      <Card value='H'/>
-      <Card value='I'/>
-      <Card value='J'/>
-    </div>
-  )
+export default class Deck extends Component {
+  render() {
+    const { view, deleteUser } = this.props
+    return (
+      <div id='Deck'>
+        {view.map(name => <User key={name} name={name} deleteUser={deleteUser} />)}
+      </div>
+    )
+  }
+
 }

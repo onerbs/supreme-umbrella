@@ -1,5 +1,6 @@
-import ReactDOM from 'react-dom';
-import React    from 'react';
-import App      from './App.jsx';
+import React    from 'react'
+import ReactDOM from 'react-dom'
 
-ReactDOM.render(<App/>, document.body);
+import App      from './App.jsx'
+
+ReactDOM.render(<App />, window.root)
