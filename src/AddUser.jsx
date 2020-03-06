@@ -7,19 +7,23 @@ export default class AddUser extends Component {
   state = {
     value: ''
   }
+  addUser = () => {
+    this.props.addUser(this.state.value)
+    this.setState({ value: '' })
+  }
   render() {
     return (
       <div id="AddUser">
         <TextField
           label='Nombre'
           value={this.state.value}
-          onChange={e => this.setState({ value: e.target.value })}>
-        </TextField>
+          onChange={event => { this.setState({ value: event.target.value }) }}
+          onKeyUp={event => { if (event.key === 'Enter') this.addUser() }}/>
         <Button
           variant="contained"
           color="primary"
           startIcon={<AddIcon />}
-          onClick={() => {this.props.addUser(this.state.value)}}>
+          onClick={this.addUser}>
           Añadir
         </Button>
       </div>

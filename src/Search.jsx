@@ -9,7 +9,7 @@ export default class Search extends Component {
         id='Search'
         label='Buscar'
         type='search'
-        onKeyUp={event => {this.props.findUser(event.target.value)}}>
+        onChange={event => {this.props.findUser(event.target.value)}}>
       </TextField>
     )
   }

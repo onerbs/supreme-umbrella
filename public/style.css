@@ -28,10 +28,20 @@ body {
 }
 
 .Card {
-  display: inline-block;
+  display: inline-flex;
   width:  calc((100% / 7));
-  margin: calc((100% / 7) / 7);
+  margin: calc((100% / 7) / 14);
+  height: 200px;
+  padding: .5em;
+  flex-direction: column;
+  position: relative;
+}
+.CardAvatar {
+  border-radius: 50%;
+  box-shadow: 0 0 3pt 1px rgba(0,0,0,0.35);
 }
 .CardActions {
   justify-content: center;
+  position: absolute;
+  bottom:0;left:0;right:0;
 }
