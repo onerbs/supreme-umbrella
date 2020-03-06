@@ -27,12 +27,16 @@ body {
   align-items: center;
 }
 
+.Button {
+  margin-left: 0.5em;
+}
+
 .UserCard {
   display: inline-flex;
   width:  calc((100% / 7));
   margin: calc((100% / 7) / 14);
   height: 200px;
-  padding: .5em;
+  padding: 1em .5em 0;
   flex-direction: column;
   position: relative;
 }

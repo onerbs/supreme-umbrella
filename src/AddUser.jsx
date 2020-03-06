@@ -8,14 +8,16 @@ export default class AddUser extends React.Component {
     input: null
   }
   componentDidMount() {
-    this.setState({ input: document.getElementsByTagName('input')[0] })
+    this.setState({
+      input: document.getElementsByTagName('input')[0]
+    })
   }
   addUser = () => {
-    let input_ = this.state.input
-    this.props.addUser(input_.value)
-    input_.value = ''
-    this.setState({ input: input_ })
-    input_.focus()
+    let inputElement = this.state.input
+    this.props.addUser(inputElement.value)
+    inputElement.value = ''
+    inputElement.focus()
+    this.setState({ input: inputElement })
   }
   render() {
     return (
@@ -25,6 +27,7 @@ export default class AddUser extends React.Component {
           onChange={ev => { this.setState({ value: ev.target.value }) }}
           onKeyUp={ev => { if (ev.key === 'Enter') { this.addUser() } }}/>
         <Button
+          className='Button'
           variant="contained"
           color="primary"
           startIcon={<AddIcon />}

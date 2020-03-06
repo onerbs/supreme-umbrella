@@ -2,10 +2,12 @@ import React from 'react'
 
 import Controls from './Controls'
 import Deck     from './Deck'
+import Record   from './UserRecord'
+import Records  from './RecordList'
 
-import { ThemeProvider }  from '@material-ui/styles'
-import { createMuiTheme } from '@material-ui/core/styles'
-import { deepPurple, amber }  from '@material-ui/core/colors'
+import { createMuiTheme }    from '@material-ui/core/styles'
+import { deepPurple, amber } from '@material-ui/core/colors'
+import { ThemeProvider }     from '@material-ui/styles'
 
 const theme = createMuiTheme({
   palette: {
@@ -21,25 +23,39 @@ export default class App extends React.Component {
     view: [],
   }
 
-  addUser = async name => {
-    if (name !== null && name !== '') {
-      // console.log(`Will add ${name}`)
-      let edit = this.state.data
-      edit.push(name)
-      this.setState({ data: edit, view: edit })
-      // console.log(this.state.data)
+  get data() {
+    return this.state.data
+  }
+
+  _isValidRecord = user => { console.log(`user: ${user}`) }
+  _hasRecord = user => {
+    for (let r of this.data)
+      if (r.equals(user))
+        return true
+    return false
+  }
+
+  addUser = (user) => {
+    if (this._isValidRecord(user)) {
+      const  record  = makeRecord(user)
+      console.log(`valid_record: ${record}`)
+      let mut = this.data
+      mut.push(record)
+      this.setState({ data: mut, view: mut })
+      console.log(`stateOf_data: ${this.data}`)
     }
   }
 
-  deleteUser = async name => {
-    if (name !== null && name !== '') {
-      // console.log(`Will remove ${name}`)
-      let edit = this.state.data
-      if (edit.includes(name)) {
-        let index = edit.indexOf(name)
-        edit.splice(index, 1)
-        this.setState({ data: edit, view: edit })
-        // console.log(this.state.data)
+  deleteUser = user => {
+    if (this._isValidRecord(user) && this._hasRecord(user)) {
+      let to_remove = this._findRecord(user)
+      console.log(`Will remove ${to_remove}`)
+      let mut = this.data
+      if (mut.includes(user)) {
+        let index = mut.indexOf(user)
+        mut.splice(index, 1)
+        this.setState({ data: mut, view: mut })
+        // console.log(this.data)
       }
     }
   }
@@ -59,11 +75,12 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    fetch('https://jsonplaceholder.typicode.com/users')
+    fetch('https://randomuser.me/api/')
       .then(res => res.json())
       .then(json => {
-        let raw = json.map(object => object.name)
-        this.setState({ data: raw, view: raw })
+        console.log(json)
+        // let raw = json.map(object => object.name)
+        // this.setState({ data: raw, view: raw })
       })
   }
 
