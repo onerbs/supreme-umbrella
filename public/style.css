@@ -27,7 +27,7 @@ body {
   align-items: center;
 }
 
-.Card {
+.UserCard {
   display: inline-flex;
   width:  calc((100% / 7));
   margin: calc((100% / 7) / 14);
