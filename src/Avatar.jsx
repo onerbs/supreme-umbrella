@@ -1,5 +1,10 @@
 import React from 'react'
 
-export default class Avatar extends React.Component {
-  //
+export default function Avatar(props) {
+  return(
+    <img
+      className='avatar'
+      src={props.url}
+    />
+  )
 }
