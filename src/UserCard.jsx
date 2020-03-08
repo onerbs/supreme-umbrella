@@ -1,11 +1,7 @@
-import React       from 'react'
-import DeleteIcon  from '@material-ui/icons/Delete'
-import {
-  Card,
-  CardActions,
-  IconButton
-} from '@material-ui/core'
-import Avatar from 'Avatar'
+import React from 'react'
+import DeleteIcon from '@material-ui/icons/Delete'
+import { Card, CardActions, IconButton } from '@material-ui/core'
+import Avatar from './Avatar'
 
 export default class User extends React.Component {
   render() {
