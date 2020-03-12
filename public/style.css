@@ -1,4 +1,4 @@
-*, ::after, ::before {
+*, *::after, *::before {
   box-sizing: border-box;
   margin: 0; padding: 0;
 }
@@ -10,14 +10,14 @@ body {
   font-family: sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #a968ff;
 }
 
 #App {
-  width: 70%;
+  width: 80%;
   margin: 0 auto;
   text-align: center;
 }
-
 #Controls {
   display: flex;
   justify-content: space-between;
@@ -26,26 +26,33 @@ body {
   display: flex;
   align-items: center;
 }
+#Deck {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 
-.Button {
-  margin-left: 0.5em;
+.MuiButton-root {
+  margin-left: 1em !important;
 }
 
 .UserCard {
   display: inline-flex;
-  width:  calc((100% / 7));
-  margin: calc((100% / 7) / 14);
-  height: 200px;
-  padding: 1em .5em 0;
+  flex-basis: 120pt;
   flex-direction: column;
-  position: relative;
+  height: 175pt;
+  justify-content: space-between;
+  margin: 1em;
+  padding: 1em 1em 0;
 }
-.CardAvatar {
+.UserCard .Email {
+  font-size: 80%;
+  opacity: 0.8;
+}
+.Avatar {
   border-radius: 50%;
-  box-shadow: 0 0 3pt 1px rgba(0,0,0,0.35);
+  margin: 0 auto;
 }
 .CardActions {
   justify-content: center;
-  position: absolute;
-  bottom:0;left:0;right:0;
 }
