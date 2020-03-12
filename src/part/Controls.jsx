@@ -1,12 +1,12 @@
 import React from 'react'
 
-import AddUser from './AddUser'
+import NewUser from './NewUser'
 import Search  from './Search'
 
 export default function Controls(props) {
   return (
     <div id='Controls'>
-      <AddUser addUser={props.addUser} />
+      <NewUser addUser={props.addUser} />
       <Search findUser={props.findUser} />
     </div>
   )
