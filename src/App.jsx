@@ -1,9 +1,8 @@
 import React from 'react'
 
-import Controls from './Controls'
-import Deck     from './Deck'
-import Record   from './UserRecord'
-import Records  from './RecordList'
+import Controls from './part/Controls'
+import Deck     from './part/Deck'
+import Record   from './lib/UserRecord'
 
 import { createMuiTheme }    from '@material-ui/core/styles'
 import { deepPurple, amber } from '@material-ui/core/colors'
@@ -27,61 +26,34 @@ export default class App extends React.Component {
     return this.state.data
   }
 
-  _isValidRecord = user => { console.log(`user: ${user}`) }
-  _hasRecord = user => {
-    for (let r of this.data)
-      if (r.equals(user))
-        return true
-    return false
-  }
-
-  addUser = (user) => {
-    if (this._isValidRecord(user)) {
-      const  record  = makeRecord(user)
-      console.log(`valid_record: ${record}`)
-      let mut = this.data
+  addUser = name => {
+    let promise = name ? Record.named(name) : Record.random()
+    promise.then(record => {
+      let mut = Array.from(this.data)
       mut.push(record)
       this.setState({ data: mut, view: mut })
-      console.log(`stateOf_data: ${this.data}`)
-    }
+    })
   }
 
-  deleteUser = user => {
-    if (this._isValidRecord(user) && this._hasRecord(user)) {
-      let to_remove = this._findRecord(user)
-      console.log(`Will remove ${to_remove}`)
-      let mut = this.data
-      if (mut.includes(user)) {
-        let index = mut.indexOf(user)
-        mut.splice(index, 1)
-        this.setState({ data: mut, view: mut })
-        // console.log(this.data)
-      }
-    }
+  deleteUser = id => {
+    let mut = this.data.filter(r => r.id !== id)
+    this.setState({ data: mut, view: mut })
   }
 
   findUser = term => {
-    const { data } = this.state
-    if (term === '') {
-      // console.log(`Restoring View`)
-      this.setState({ view: data })
-    } else {
-      // console.log(`Searching: ${term}`)
-      let edit = data
-        // .map(name => name.toLowerCase())
-        .filter(name => name.includes(term))
-      this.setState({ view: edit })
-    }
+    if (term === '') this.setState({ view: this.data })
+    else this.setState({ view: this.data.filter(r => r.name.includes(term)) })
   }
 
   componentDidMount() {
-    fetch('https://randomuser.me/api/')
-      .then(res => res.json())
-      .then(json => {
-        console.log(json)
-        // let raw = json.map(object => object.name)
-        // this.setState({ data: raw, view: raw })
+    let nof_users = 5
+    while (nof_users-- > 0) {
+      Record.random().then(record => {
+        let data_ = Array.from(this.data)
+        data_.push(record)
+        this.setState({ data: data_, view: data_ })
       })
+    }
   }
 
   render() {
