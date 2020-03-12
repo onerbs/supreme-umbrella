@@ -3,9 +3,12 @@ import React from 'react'
 import { TextField, Button } from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add'
 
-export default class AddUser extends React.Component {
+export default class NewUser extends React.Component {
   state = {
     input: null
+  }
+  get input() {
+    return this.state.input
   }
   componentDidMount() {
     this.setState({
@@ -13,25 +16,21 @@ export default class AddUser extends React.Component {
     })
   }
   addUser = () => {
-    let inputElement = this.state.input
-    this.props.addUser(inputElement.value)
-    inputElement.value = ''
-    inputElement.focus()
-    this.setState({ input: inputElement })
+    this.props.addUser(this.input.value)
+    this.input.value = ''
+    this.input.focus()
   }
   render() {
     return (
       <div id="AddUser">
         <TextField
           label='Nombre'
-          onChange={ev => { this.setState({ value: ev.target.value }) }}
-          onKeyUp={ev => { if (ev.key === 'Enter') { this.addUser() } }}/>
+          onKeyUp={event => { if (event.key === 'Enter') this.addUser() }}/>
         <Button
-          className='Button'
           variant="contained"
           color="primary"
           startIcon={<AddIcon />}
-          onClick={_ => { this.addUser() }}>
+          onClick={() => { this.addUser() }}>
           Añadir
         </Button>
       </div>
