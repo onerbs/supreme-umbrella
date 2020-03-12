@@ -8,7 +8,7 @@ export default function Search(props) {
       id='Search'
       label='Buscar'
       type='search'
-      onChange={event => {props.findUser(event.target.value)}}>
+      onChange={event => { props.findUser(event.target.value) }}>
     </TextField>
   )
 }
