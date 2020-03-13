@@ -1,16 +1,15 @@
 import React from 'react'
-
-import UserCard from './UserCard'
+import Card from './Card'
 
 export default function Deck(props) {
   const { view, deleteUser } = props
   return (
     <div id='Deck'>{
       view.map(user =>
-        <UserCard
+        <Card
+          deleteUser={deleteUser}
           key={user.id}
-          user={user}
-          deleteUser={deleteUser}/>)
+          user={user}/>)
     }</div>
   )
 }
