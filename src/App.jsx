@@ -1,8 +1,8 @@
 import React from 'react'
 
-import Controls from './part/Controls'
-import Deck     from './part/Deck'
-import Record   from './lib/UserRecord'
+import Form   from './part/Form'
+import Deck   from './part/Deck'
+import Record from './lib/Record'
 
 import { createMuiTheme }    from '@material-ui/core/styles'
 import { deepPurple, amber } from '@material-ui/core/colors'
@@ -26,13 +26,14 @@ export default class App extends React.Component {
     return this.state.data
   }
 
+  createNewUser = user => {
+    let mut = [...this.data, user]
+    this.setState({ data: mut, view: mut })
+  }
+
   addUser = name => {
     let promise = name ? Record.named(name) : Record.random()
-    promise.then(record => {
-      let mut = Array.from(this.data)
-      mut.push(record)
-      this.setState({ data: mut, view: mut })
-    })
+    promise.then(this.createNewUser)
   }
 
   deleteUser = id => {
@@ -46,21 +47,15 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    let nof_users = 5
-    while (nof_users-- > 0) {
-      Record.random().then(record => {
-        let data_ = Array.from(this.data)
-        data_.push(record)
-        this.setState({ data: data_, view: data_ })
-      })
-    }
+    // simulation
+    let U = 10; while (U-- > 0) Record.random().then(this.createNewUser)
   }
 
   render() {
     return (
       <ThemeProvider theme={theme}>
         <div id='App'>
-          <Controls addUser={this.addUser} findUser={this.findUser} />
+          <Form addUser={this.addUser} findUser={this.findUser} />
           <Deck view={this.state.view} deleteUser={this.deleteUser} />
         </div>
       </ThemeProvider>

@@ -13,7 +13,7 @@ export default class Record {
     this.name = name
     return this
   }
-  static from = raw => new Record(raw)
+  static from = raw_data => new Record(raw_data)
   static named = name => Record.random().then(r => r.rename(name))
   static random = () =>
     fetch('https://randomuser.me/api/')
