@@ -26,14 +26,16 @@ export default class App extends React.Component {
     return this.state.data
   }
 
-  createNewUser = user => {
+  tryAddNewUser = user => {
+    if (this.data.map(user => user.email).includes(user.email))
+      return console.error(`El usuario ${user.name} ya existe.`)
     let mut = [...this.data, user]
     this.setState({ data: mut, view: mut })
   }
 
   addUser = name => {
     let promise = name ? Record.named(name) : Record.random()
-    promise.then(this.createNewUser)
+    promise.then(this.tryAddNewUser)
   }
 
   deleteUser = id => {
@@ -48,7 +50,7 @@ export default class App extends React.Component {
 
   componentDidMount() {
     // simulation
-    let U = 10; while (U-- > 0) Record.random().then(this.createNewUser)
+    let U = 10; while (U-- > 0) Record.random().then(this.tryAddNewUser)
   }
 
   render() {

@@ -36,7 +36,7 @@ body {
   margin-left: 1em !important;
 }
 
-.UserCard {
+.Card {
   display: inline-flex;
   flex-basis: 120pt;
   flex-direction: column;
@@ -45,7 +45,7 @@ body {
   margin: 1em;
   padding: 1em 1em 0;
 }
-.UserCard .Email {
+.Card .Email {
   font-size: 80%;
   opacity: 0.8;
 }

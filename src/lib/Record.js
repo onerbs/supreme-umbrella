@@ -1,4 +1,3 @@
-
 import R from './Random'
 
 export default class Record {
@@ -11,6 +10,7 @@ export default class Record {
   }
   rename = name => {
     this.name = name
+    this.email = name.toLowerCase().replace(' ', '.')
     return this
   }
   static from = raw_data => new Record(raw_data)
